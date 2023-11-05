@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class maxHeapSort {
 
@@ -27,6 +29,10 @@ public class maxHeapSort {
             arr[i] = arr[largest];
             arr[largest] = temp;
 
+            // Debug: print the array after each swap
+            System.out.println("Heapify swap: " + arr[i] + " with " + arr[largest]);
+            printArray(arr);
+
             heapify(arr, n, largest);
         }
     }
@@ -37,16 +43,6 @@ public class maxHeapSort {
         // Build heap
         for(int i=n/2-1; i>=0; i--){
             heapify(arr, n, i);
-        }
-
-        // One by one extract an element from heap
-        for(int i=n-1; i>0; i--){
-            // Move current root to end
-            int temp = arr[0];
-            arr[0] = arr[i];
-            arr[i] = temp;
-
-            heapify(arr, i, 0);
         }
     }
 
@@ -81,10 +77,24 @@ public class maxHeapSort {
             System.out.println("Error reading the CSV file: " + e.getMessage());
             return;
         }
+
+        // For example
+        // int n = 8; // Size of the array
+        // int upperLimit = 100; // Upper limit of random integers (exclusive)
+        
+        // Random rand = new Random(); // Instance of Random
+        // int[] arr = new int[n];
+
+        // for (int i = 0; i < arr.length; i++) {
+        //     arr[i] = rand.nextInt(upperLimit);
+        // }
+
+        System.out.println("Original array:");
+        printArray(arr);
     
         heapSort(arr);
     
-        System.out.println("Sorted array:");
+        System.out.println("Sorted array (root to leaves from right to left):");
         printArray(arr);
 
         long endTime = System.currentTimeMillis();

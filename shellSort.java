@@ -42,21 +42,33 @@ public class shellSort {
         for (int offset = n/2; offset > 0; offset /= 2) {
             for (int i=0; i < n - offset; i += offset){ // compare-exchange up
                 compareExchange(arr,i,i+offset,offset,rand);
+                System.out.println("After compare-exchange up with offset " + offset + ":");
+                printArray(arr); // Debug print
             }
             for (int i=n-offset; i >= offset; i -= offset){ // compare-exchange down
                 compareExchange(arr,i-offset,i,offset,rand);
+                System.out.println("After compare-exchange down with offset " + offset + ":");
+                printArray(arr); // Debug print
             }
             for (int i=0; i < n-3*offset; i += offset){ // compare 3 hops up
                 compareExchange(arr,i,i+3*offset,offset,rand);
+                System.out.println("After compare 3 hops up with offset " + offset + ":");
+                printArray(arr); // Debug print
             }
             for (int i=0; i < n-2*offset; i += offset){ // compare 2 hops up
                 compareExchange(arr,i,i+2*offset,offset,rand);
+                System.out.println("After compare 2 hops up with offset " + offset + ":");
+                printArray(arr); // Debug print
             }
             for (int i=0; i < n; i += 2*offset){ // compare odd-even regions
                 compareExchange(arr,i,i+offset,offset,rand);
+                System.out.println("After compare odd-even regions with offset " + offset + ":");
+                printArray(arr); // Debug print
             }
             for (int i=offset; i < n-offset; i += 2*offset){ // compare even-odd regions
                 compareExchange(arr,i,i+offset,offset,rand);
+                System.out.println("After compare even-odd regions with offset " + offset + ":");
+                printArray(arr); // Debug print
             }
         }   
     }
@@ -83,7 +95,7 @@ public class shellSort {
         long startTime = System.currentTimeMillis();
         Runtime runtime = Runtime.getRuntime();
         
-        String csvFile = "reversed_small.csv";
+        String csvFile = "reversed_small.csv"; // Please change the file name here, as you wished
         int[] arr = new int[0];
         try {
             arr = readFromCSV(csvFile);
@@ -91,6 +103,20 @@ public class shellSort {
             System.out.println("Error reading the CSV file: " + e.getMessage());
             return;
         }
+
+        // For example
+        // int n = 8; // Size of the array
+        // int upperLimit = 100; // Upper limit of random integers (exclusive)
+        
+        // Random rand = new Random(); // Instance of Random
+        // int[] arr = new int[n];
+
+        // for (int i = 0; i < arr.length; i++) {
+        //     arr[i] = rand.nextInt(upperLimit);
+        // }
+
+        System.out.println("Original array:");
+        printArray(arr);
     
         randomizedShellSort(arr);
     
